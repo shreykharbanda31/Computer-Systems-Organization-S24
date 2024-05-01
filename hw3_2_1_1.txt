@@ -1,0 +1,33 @@
+HW3 2.1
+
+2.1.1 Question 1:
+
+What would be the equivalent in x86-64 Assembly of the following lines in C:
+
+1 n - > id = 10;
+2 n - > name = NULL;
+3 n - > next = n;
+
+ANS:
+
+1 movq $0x10, (%rdi)
+2 movq $0, 0x8(%rdi)
+3 movq %rdi, 0x10(%rdi)
+
+What do you have to add in your main to make this code work?
+
+ANS:
+
+We need to allocate memory for a new node by using malloc and later free any memory after use using free().
+This code should work if n has allocated memory for it's variables.
+So, we can add the following 2 lines to the main for it to work:
+int main() {
+    Node *n = malloc(sizeof(Node)); // Added this Line, allocate memory
+    n - > id = 10;
+    n - > name = NULL;
+    n - > next = n;
+    free(n); // Added this Line, free memory when done
+    return 0;
+}
+
+ 
